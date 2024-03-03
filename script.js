@@ -32,16 +32,16 @@ const updateHTML = (data) => {
   sunset.innerText += `Sunset: ${sunsetShort}`
 }
 
-const updateHTMLforecast = (json) => {
-  const filteredForecast = json.list.filter((item) =>
+const updateHTMLforecast = (data) => {
+  const filteredForecast = data.list.filter((item) =>
     item.dt_txt.includes("12:00")
   )
   const tomorrow = new Date()
   tomorrow.setDate(tomorrow.getDate() + 1)
-  for (let counter = 0; counter < 4; counter++) {
-    const day = filteredForecast[counter]
+  for (let addDay = 0; addDay < 4; addDay++) {
+    const day = filteredForecast[addDay]
     const date = new Date(tomorrow)
-    date.setDate(date.getDate() + counter)
+    date.setDate(date.getDate() + addDay)
     const weekdayName = date.toLocaleDateString("en-GB", { weekday: "short" })
     const weekdayTemp = day.main.temp.toFixed(0)
     const weekdayDescription = day.weather[0].description
